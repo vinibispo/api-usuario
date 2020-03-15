@@ -9,6 +9,9 @@ app.use(express.urlencoded({extended: false}))
 app.use(cors())
 app.use('/users', routes)
 
+app.get('/', (req, res)=>{
+    res.redirect('/users')
+})
 database.connect
 database.once
 database.error
