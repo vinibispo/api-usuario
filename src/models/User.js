@@ -14,4 +14,4 @@ const UserSchema = new Schema({
         required: String
     }
 })
-module.exports = new Model(UserSchema, 'User')
+module.exports = Model(UserSchema, 'User')
