@@ -20,7 +20,7 @@ const UserController =  {
         const id = req.params.id
         const {name, email, password} = req.body
         try {
-            const user = await User.findByIdAndUpdate(id)
+            const user = await User.findByIdAndUpdate(id, {name, email, password})
             res.status(200).send(user)
         } catch (error) {
             res.status(401).send(error)

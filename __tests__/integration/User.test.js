@@ -1,6 +1,6 @@
 const supertest = require('supertest')
 const app = require('../../src/app')
-
+const User = require('../../src/models/User')
 const request = supertest(app)
 
 describe('Controller de Usuário', ()=>{
@@ -20,5 +20,10 @@ describe('Controller de Usuário', ()=>{
     it('Deve retornar 201, quando o usuário for para a rota POST /users/add', async()=>{
         const response  = await request.post('/users/add').send({name: 'Teste', email: 'teste@teste', senha: 'senha'})
         expect(response.status).toBe(201)
+    })
+    it('Deve retornar 200 quando o usuário utilizar a rota 200 PUT /:id', async()=>{
+        const users = await User.find({})
+        const user = users[0]
+        const response = await request.put(`/users/${user._id}`)
     })
 })
