@@ -1,3 +1,4 @@
+const User = require('../models/User')
 const UserController =  {
     findAll: async(req, res)=>{
         try {
@@ -35,3 +36,4 @@ const UserController =  {
         }
     }
 }
+module.exports = UserController
