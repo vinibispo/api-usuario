@@ -8,4 +8,8 @@ describe('Controller de Usuário', ()=>{
         const response = await request.get('/')
         expect(response.status).toBe(302)
     })
+    it('Deve retornar 200 quando for para a rota GET /users', async()=>{
+        const response = await request.get('/users/')
+        expect(response.status).toBe(200)
+    })
 })
