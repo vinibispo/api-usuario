@@ -18,7 +18,6 @@ describe('Controller de Usuário', ()=>{
     })
     it('Deve haver um usuário com o nome Teste quando o usuário for para a rota GET /users', async()=>{
         const response = await request.get('/users/')
-        console.log(response.body)
         expect(response.body[0].name).toBe('Teste')
     })
     it('Deve retornar 201, quando o usuário for para a rota POST /users/add', async()=>{
