@@ -1,4 +1,5 @@
 const {Router} = require('express')
+const User = require('./controllers/User')
 const routes = Router()
 
 routes.get('/', User.findAll)
