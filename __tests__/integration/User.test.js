@@ -12,11 +12,12 @@ describe('Controller de Usuário', ()=>{
         const response = await request.get('/users/')
         expect(response.status).toBe(200)
     })
-    it('Deve haver conteúdo quando o usuário for para a rota GET /users', async()=>{
-        const reponse = await request.get('/users/')
-        expect(reponse.body[0].name).toBe('Teste')
+    it('Deve haver um usuário com o nome Teste quando o usuário for para a rota GET /users', async()=>{
+        const response = await request.get('/users/')
+        console.log(response.body)
+        expect(response.body[0].name).toBe('Teste')
     })
-    it('deve retornar 201, quando o usuário for para a rota POST /users/add', async()=>{
+    it('Deve retornar 201, quando o usuário for para a rota POST /users/add', async()=>{
         const response  = await request.post('/users/add').send({name: 'Teste', email: 'teste@teste', senha: 'senha'})
         expect(response.status).toBe(201)
     })
