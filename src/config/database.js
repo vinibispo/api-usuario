@@ -9,7 +9,7 @@ const myDb = {
     once: mongoose.connection.once('open', ()=>{
              console.log('Connected to MongoDB')
          }),
-    error: db.on('error', (err)=>{
+    error: mongoose.connection.on('error', (err)=>{
            console.log(err)
        })
 }
