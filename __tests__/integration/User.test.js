@@ -34,5 +34,6 @@ describe('Controller de Usuário', ()=>{
         const users =  await User.find({})
         const user = users[0]
         const response = await request.delete(`/users/${user._id}`)
+        expect(response.status).toBe(204)
     })
 })
