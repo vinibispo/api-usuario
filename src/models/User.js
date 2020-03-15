@@ -1,4 +1,4 @@
-const {Schema, Model} = require('mongoose')
+const {Schema, Model} = require('../config/database')
 const UserSchema = new Schema({
     name:{
         type: String,
