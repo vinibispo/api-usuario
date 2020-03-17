@@ -1,9 +1,16 @@
 const User = require('../models/User')
+const redis = require('../utils/redis')
 const UserController =  {
     findAll: async(req, res)=>{
+        let users = await redis.get('ALL')
         try {
-            const users = await User.find({})
-            res.status(200).send(users)
+            if(!users){
+                users = await User.find({})
+                await redis.set('ALL', users)
+                res.status(200).send(users)
+            }else{
+                res.send(users)
+            }
         } catch (error) {
             res.status(401).send(error)
         }
@@ -33,6 +40,19 @@ const UserController =  {
             res.status(204).send()
         } catch (error) {
             res.status(401).send(error)
+        }
+    },
+    findBySomeInformation: async(req, res)=>{
+        const {search} = req.params
+        let user = await redis.get(search)
+        try{
+            if(!user){
+                user = await User.find().or([{name:new RegExp(search, "ig") }, {email: new RegExp(search, "ig")}, {password: new RegExp(search, "ig")}])
+                await redis.set(search, user)
+                res.status(200).send(user)
+            }
+        }catch(err){
+            res.status(401).send(err)
         }
     }
 }
