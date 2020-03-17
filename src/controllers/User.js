@@ -43,7 +43,17 @@ const UserController =  {
         }
     },
     findBySomeInformation: async(req, res)=>{
-        console.log(req.query.search)
+        const {search} = req.params
+        let user = await redis.get(search)
+        try{
+            if(!user){
+                user = await User.find().or([{name:new RegExp(search, "ig") }, {email: new RegExp(search, "ig")}, {password: new RegExp(search, "ig")}])
+                await redis.set(search, user)
+                res.status(200).send(user)
+            }
+        }catch(err){
+            res.status(401).send(err)
+        }
     }
 }
 module.exports = UserController
