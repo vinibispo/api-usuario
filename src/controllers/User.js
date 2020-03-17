@@ -2,11 +2,11 @@ const User = require('../models/User')
 const redis = require('../utils/redis')
 const UserController =  {
     findAll: async(req, res)=>{
-        let users = redis.get('ALL') 
+        let users = await redis.get('ALL')
         try {
             if(!users){
                 users = await User.find({})
-                redis.set('ALL', users)
+                await redis.set('ALL', users)
                 res.status(200).send(users)
             }else{
                 res.send(users)
@@ -41,6 +41,9 @@ const UserController =  {
         } catch (error) {
             res.status(401).send(error)
         }
+    },
+    findBySomeInformation: async(req, res)=>{
+        console.log(req.query.search)
     }
 }
 module.exports = UserController

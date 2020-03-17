@@ -6,14 +6,14 @@ const GET = (key) =>{
             if(err){
                 reject(err)
             }else{
-                resolve(value)
+                resolve(JSON.parse(value))
             }
         })
     })
 }
 const SET = (key, value) =>{
     return new Promise((resolve, reject)=>{
-        redisClient.set(key, value, 'EX', 60, (err)=>{
+        redisClient.set(key, JSON.stringify(value), 'EX', 60, (err)=>{
             if(err){
                 reject(err)
             }
